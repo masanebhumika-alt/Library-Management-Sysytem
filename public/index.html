@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 Library Management System</h1>
+    </header>
+
+    <section id="login-section">
+      <h2>Login</h2>
+      <form id="login-form">
+        <label>
+          Username:
+          <input type="text" id="username" required placeholder="Enter your name" />
+        </label>
+        <label id="password-label" class="hidden">
+          Admin Password:
+          <input type="password" id="password" placeholder="Enter admin password" />
+        </label>
+        <label>
+          Role:
+          <select id="role">
+            <option value="customer">Customer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </label>
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+    </section>
+
+    <section id="main-section" class="hidden">
+      <nav>
+        <button id="btn-browse" class="btn-primary">Browse Books</button>
+        <button id="btn-mybooks" class="btn-primary">My Books</button>
+        <button id="btn-admin" class="btn-primary">Admin Panel</button>
+        <button id="btn-logout" class="btn-logout">Logout</button>
+      </nav>
+
+      <main id="content-area" aria-live="polite"></main>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
