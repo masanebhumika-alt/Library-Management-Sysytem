@@ -1,7 +1,19 @@
 // database.js
 const Database = require("better-sqlite3");
 const path = require("path");
-const db = new Database(path.join(__dirname, "library.db"), { verbose: console.log });
+const fs = require("fs");
+
+// On Render with a persistent disk, set DB_PATH=/var/data/library.db
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, "library.db");
+fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
+
+// First run on a fresh disk: start from the bundled library.db so existing data is kept
+const BUNDLED = path.join(__dirname, "library.db");
+if (!fs.existsSync(DB_PATH) && fs.existsSync(BUNDLED) && DB_PATH !== BUNDLED) {
+  fs.copyFileSync(BUNDLED, DB_PATH);
+}
+
+const db = new Database(DB_PATH);
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS books (
