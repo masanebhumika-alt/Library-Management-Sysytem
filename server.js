@@ -232,6 +232,14 @@ app.post("/api/suggestions/:id/approve", (req, res) => {
     }
 });
 
+// Download the live database (protected by a secret key)
+app.get("/api/admin/download-db", (req, res) => {
+    if (!process.env.ADMIN_KEY || req.query.key !== process.env.ADMIN_KEY) {
+        return res.status(403).send("Forbidden");
+    }
+    res.download(db.name, "library-live.db");
+});
+
 // ─── START ────────────────────────────────────────────────────────
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`✅ Library server running on port ${PORT}`);
